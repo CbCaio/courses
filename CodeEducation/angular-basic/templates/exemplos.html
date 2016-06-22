@@ -1,0 +1,90 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <script src="../node_modules/angular/angular.min.js"></script>
+</head>
+<body>
+
+<div style="background-color: aliceblue" ng-controller="CtrlApp">
+    <hr>
+    <h1> Escopo do Controller CtrlApp </h1>
+    <h2>ng-model</h2>
+    <input type="text" ng-model="var" placeholder="Mudar var">
+    <br>
+    <label>{{ var }}</label>
+
+    <h2> ng-repeat </h2>
+    Busca qualquer coisa: <input type="search" ng-model="busca.$"><br>
+    Busca por nome: <input type="search" ng-model="busca.nome"><br>
+    Busca cidade: <input type="search" ng-model="busca.cidade"><br>
+    <ul>
+        <li ng-repeat="pessoa in pessoas | filter:busca">
+            {{ pessoa.nome }}, <b>{{ pessoa.cidade }}</b>
+            <button ng-click="remover($index)"> Remover </button>
+        </li>
+    </ul>
+
+    <h3> Tamanho da lista: {{ pessoas.length }} </h3>
+
+    <div>
+        Nome: <input type="text" ng-model="selected.nome">
+        <br>
+        Cidade: <input type="text" ng-model="selected.cidade">
+        <button ng-click="adicionar()"> Adicionar a lista </button>
+    </div>
+
+    <h2> ng-change </h2>
+    <br>
+    <input type="text" ng-model="nome" ng-change="loggar()">
+    <br>
+
+    <h2> ng-option </h2>
+    <br>
+    <label>Pessoas</label>
+    <select ng-model="selected" ng-options="pessoa.nome for pessoa in pessoas">
+        <option value="">Selecione alguem</option>
+    </select>
+
+</div>
+
+<div>
+    <h1> Fora do escopo do controller</h1>
+    <h2> ng-show/hide</h2>
+    <input type="checkbox" ng-model="check"> Check
+    <div style="background-color: aquamarine" ng-show="check"> Checado! </div>
+    <div style="background-color: antiquewhite" ng-hide="check"> Não checado ! </div>
+</div>
+<script>
+    var myApp = angular.module('myApp', []);
+    var CtrlApp = function($scope){
+        $scope.var = 'teste';
+        $scope.pessoas = [
+            { nome: 'Cassio'  , cidade: 'Ouro Fino/Campinas'},
+            { nome: 'Daniel'  , cidade: 'Ouro Fino'},
+            { nome: 'Thaisa'  , cidade: 'Lavras'},
+            { nome: 'Bruno'  , cidade: 'Ouro Fino'},
+            { nome: 'Caio'  , cidade: 'Ouro Fino'}
+        ];
+
+        $scope.adicionar = function() {
+            $scope.pessoas.push({
+                nome: $scope.vNome , cidade: $scope.vCidade
+            });
+
+            $scope.vNome = "";
+            $scope.vCidade = "";
+        };
+
+        $scope.remover = function(index) {
+            $scope.pessoas.splice(index,1);
+        };
+
+        $scope.loggar = function(){
+            alert($scope.nome);
+        };
+    };
+    myApp.controller('CtrlApp', CtrlApp);
+</script>
+</body>
+</html>

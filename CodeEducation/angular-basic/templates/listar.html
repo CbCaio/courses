@@ -1,0 +1,10 @@
+<h2>Listagem de pessoas</h2>
+<ul>
+    <li ng-repeat="pessoa in pessoas">
+        <a href="#/pessoa/{{$index}}">
+            {{ pessoa.nome | upper }},{{ pessoa.cidade }}
+        </a>
+    </li>
+</ul>
+<br>
+<a href="#/pessoa/adicionar">Adicionar nova pessoa</a>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html ng-app="pessoas">
+<head>
+    <meta charset="UTF-8">
+    <title>Pessoas</title>
+</head>
+<body>
+
+<div ng-controller="CtrlPessoas">
+    <h1>Sistema de gerenciamento de pessoas</h1>
+
+    <div ng-view></div>
+
+</div>
+
+<div ng-controller="CtrlApp">
+    <h1> Diretiva pesonalizada </h1>
+    <button son-click="executa()"> Click event</button>
+    <br><br>
+    <son-click2 click="executa()">Diretiva tipo E</son-click2>
+</div>
+
+</body>
+<script src="node_modules/angular/angular.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.min.js"></script>
+<script src="pessoas.js"></script>
+</html>
